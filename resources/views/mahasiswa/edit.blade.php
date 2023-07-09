@@ -27,7 +27,7 @@
     <!-- END -->
 
     <!-- START FORM -->
-    <form action='{{ route('mahasiswa.store') }}' method='post' enctype="multipart/form-data">
+    <form action="{{ route('mahasiswa.update', $mahasiswa->id) }}" method='post' enctype="multipart/form-data">
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger mt-3" role="alert" id="danger-alert">
@@ -44,54 +44,67 @@
                 }, 5000);
             </script>
         @endif
-        
+        @method('PUT')
             <div class="mb-3 row">
                 <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name='nama' id="nama">
+                    <input type="text" class="form-control" name='nama' id="nama" value="{{ $mahasiswa->nama }}">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="nim" class="col-sm-2 col-form-label">NIM</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name='nim' id="nim">
+                    <input type="text" class="form-control" name='nim' id="nim" value="{{ $mahasiswa->nim }}">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="no_telpon" class="col-sm-2 col-form-label">No Telpon</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name='no_telpon' id="no_telpon">
+                    <input type="text" class="form-control" name='no_telpon' id="no_telpon" value="{{ $mahasiswa->no_telpon}}">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="umur" class="col-sm-2 col-form-label">Umur</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name='umur' id="umur">
+                    <input type="number" class="form-control" name='umur' id="umur" value="{{ $mahasiswa->umur }}">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name='alamat' id="alamat">
+                    <input type="text" class="form-control" name='alamat' id="alamat" value="{{ $mahasiswa->alamat }}">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                 <div class="col-sm-10">
-                    <input type="date" class="form-control" name='tanggal_lahir' id="tanggal_lahir">
+                    <input type="date" class="form-control" name='tanggal_lahir' id="tanggal_lahir" value="{{ $mahasiswa->tanggal_lahir }}">
                 </div>
             </div>
+            <script>
+                //menangkap elemen input tanggal_lahir
+                var tanggalLahir = document.getElementById('tanggal_lahir');
+
+                //cek apakah nilai awal elemen input sudah terisi 
+                if (tanggalLahir.value){
+                    tanggalLahir.style.display = 'block'; //tampilkan elemen
+                }
+                else {
+                    tanggalLahir.style.display = 'none'; //sembunyikan elemen
+                }
+            </script>
+
         <fieldset class="row mb-3">
             <legend class="col-form-label col-sm-2 pt-0">Jenis Kelamin</legend>
             <div class="col-sm-10">
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin1" value="Perempuan" checked>
+                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin1" value="Perempuan"{{ $mahasiswa->jenis_kelamin }} checked>
                 <label class="form-check-label" for="jenis_kelamin1">
                 Perempuan
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin2" value="Laki-Laki">
+                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin2" value="Laki-Laki"{{ $mahasiswa->jenis_kelamin }}>
                 <label class="form-check-label" for="jenis_kelamin2">
                 Laki-Laki
                 </label>
@@ -105,7 +118,7 @@
         </fieldset>
             <div class="mb-3 row">
                 <label for="jurusan" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10"><button type="submit" class="btn btn-primary" name="submit">SIMPAN</button></div>
+                <div class="col-sm-10"><button type="submit" class="btn btn-primary" name="submit">SIMPAN PERUBAHAN</button></div>
             </div>
         </div>
     </form>

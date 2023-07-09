@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\mahasiswaController;
+use App\Http\Controllers\universitasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::resource('mahasiswa', mahasiswaController::class);
+Route::resource('universitas', universitasController::class);

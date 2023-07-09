@@ -39,7 +39,7 @@ class mahasiswaController extends Controller
             'alamat'=>'required',
             'tanggal_lahir'=>'required',
             'jenis_kelamin'=>'required',
-            'image'=>'required|image|mimes:jpeg,jpg,png|max:2048',
+            'image'=>'required|image|mimes:jpeg,jpg,png|max:100000',
         ]);
 
         //upload image
@@ -55,11 +55,12 @@ class mahasiswaController extends Controller
             'alamat'=>$request->alamat,
             'tanggal_lahir'=>$request->tanggal_lahir,
             'jenis_kelamin'=>$request->jenis_kelamin,
-            'image'=>$image->hashName(),
+            'image'=>$image->hashName()
         ]);
 
         //redirect ke index
         return redirect()->route('mahasiswa.index')->with(['success'=>'Data Berhasil Disimpan!']);
+        
     }
 
     /**
@@ -69,6 +70,7 @@ class mahasiswaController extends Controller
     {
         //get post by ID 
         $mahasiswa = mahasiswa::findOrFail($id);
+        return view('mahasiswa.show', compact('mahasiswa'));
     }
 
     /**
@@ -76,7 +78,8 @@ class mahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mahasiswa = mahasiswa::findOrFail($id);
+        return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
     /**
@@ -84,7 +87,48 @@ class mahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request,[
+            'nama'=>'required',
+            'nim'=>'required|numeric',
+            'no_telpon'=>'required|numeric',
+            'umur'=>'required|numeric',
+            'alamat'=>'required',
+            'tanggal_lahir'=>'required|date',
+            'jenis_kelamin'=>'required',
+            'image'=>'required|image|mimes:jpeg,jpg,png|max:100000',
+        ]);
+        $mahasiswa = mahasiswa::findOrFail($id);
+
+        if ($request->hasFile('image')){
+
+            $image = $request->file('image');
+            $image->storeAs('public/post', $image->hashName());
+
+            Storage::delete('public/post' .$mahasiswa->image);
+
+            $mahasiswa->update([
+                'nama'=>$request->nama,
+                'nim'=>$request->nim,
+                'no_telpon'=>$request->no_telpon,
+                'umur'=>$request->umur,
+                'alamat'=>$request->alamat,
+                'tanggal_lahir'=>$request->tanggal_lahir,
+                'jenis_kelamin'=>$request->jenis_kelamin,
+                'image'=>$image->hashName()
+            ]);
+        }
+        else {
+            $mahasiswa->update([
+                'nama'=>$request->nama,
+                'nim'=>$request->nim,
+                'no_telpon'=>$request->no_telpon,
+                'umur'=>$request->umur,
+                'alamat'=>$request->alamat,
+                'tanggal_lahir'=>$request->tanggal_lahir,
+                'jenis_kelamin'=>$request->jenis_kelamin,
+            ]);
+        }
+        return redirect()->route('mahasiswa.index')->with(['success'=>'Data Berhasil Diperbarui!']);
     }
 
     /**
@@ -92,6 +136,15 @@ class mahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $mahasiswa = mahasiswa::findOrFail($id);
+
+        //hapus gambar
+        Storage::delete('public/post'. $mahasiswa->image);
+
+        //hapus post 
+        $mahasiswa->delete();
+
+        //redirect to index
+        return redirect()->route('mahasiswa.index')-> with(['success'=>'Data Berhasil di Hapus!']);
     }
 }
