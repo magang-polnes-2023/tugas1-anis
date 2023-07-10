@@ -4,7 +4,7 @@
     @section('konten')
     <nav class=" my-3 p-3 bg-body navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="/">Home</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -17,10 +17,6 @@
                 <a class="nav-link active" href="{{route('universitas.index')}}">Universitas</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
             </div>
         </div>
         </nav>
@@ -85,7 +81,7 @@
             <legend class="col-form-label col-sm-2 pt-0">Jenis Kelamin</legend>
             <div class="col-sm-10">
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin1" value="Perempuan" checked>
+                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin1" value="Perempuan">
                 <label class="form-check-label" for="jenis_kelamin1">
                 Perempuan
                 </label>

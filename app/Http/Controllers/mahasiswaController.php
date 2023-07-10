@@ -11,9 +11,17 @@ class mahasiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $mahasiswa = mahasiswa::latest()->paginate(5);
+        $katakunci = $request->katakunci;
+        if(strlen($katakunci)){
+            $mahasiswa = mahasiswa::where('nim','like',"%$katakunci%")
+                ->orWhere('nama','like',"%$katakunci%")
+                ->paginate(5);
+        }
+        else{
+            $mahasiswa = mahasiswa::latest()->paginate(5);
+        }
         return view ('mahasiswa.index', compact('mahasiswa'));
     }
 
@@ -95,7 +103,7 @@ class mahasiswaController extends Controller
             'alamat'=>'required',
             'tanggal_lahir'=>'required|date',
             'jenis_kelamin'=>'required',
-            'image'=>'required|image|mimes:jpeg,jpg,png|max:100000',
+            'image'=>'image|mimes:jpeg,jpg,png|max:100000',
         ]);
         $mahasiswa = mahasiswa::findOrFail($id);
 

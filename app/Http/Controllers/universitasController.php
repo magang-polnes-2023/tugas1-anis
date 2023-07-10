@@ -81,12 +81,12 @@ class universitasController extends Controller
             'alamat'=>'required',
             'no_telpon'=>'required',
             'email'=>'required|email',
-            'akreditas'=>'required',
+            'akreditasi'=>'required',
             ]);
 
         $universitas = universitas::findOrFail($id);
 
-        $mahasiswa->update([
+        $universitas->update([
             'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'no_telpon'=>$request->no_telpon,
