@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class mahasiswa extends Model
 {
     use HasFactory;
+    protected $table = 'mahasiswa';
     protected $fillable = [
+        'universitas_id',
         'nama',
         'nim',
         'no_telpon',
@@ -19,5 +21,8 @@ class mahasiswa extends Model
         'image',
     ];
 
-    protected $table = 'mahasiswa';
+    public function universitas()
+    {
+        return $this->belongsTo(universitas::class);
+    }
 }

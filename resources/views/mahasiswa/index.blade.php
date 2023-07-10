@@ -41,10 +41,10 @@
                     <thead>
                         <tr>
                             <th class="col-md-1">No</th>
+                            <th class="col-md-2">Nama Universitas</th>
                             <th class="col-md-2">Image</th>
                             <th class="col-md-2">Nama</th>
-                            <th class="col-md-2">NIM</th>
-                            <th class="col-md-2">Tanggal Lahir</th>
+                            <th class="col-md-1">NIM</th>
                             <th class="col-md-2">Aksi</th>
                         </tr>
                     </thead>
@@ -53,13 +53,13 @@
                         @foreach ($mahasiswa as $data)
                             <tr>
                                 <td class="text-middle">{{ $loop->iteration }}</td>
+                                <td class="text-middle">{{ $data->universitas->nama }}</td>
                                 <td class="text-middle">
                                     <img src="{{ asset('/storage/post/' .$data->image) }}" class="rounded"
                                         style="width:70px">
                                 </td>
                                 <td class="text-middle">{{ $data->nama }}</td>
                                 <td class="text-middle">{{ $data->nim }}</td>
-                                <td class="text-middle">{{ $data->tanggal_lahir }}</td>
                                 <td>
                                     <form onsubmit="return confirm('Menghapus Data?');"
                                         action="{{ route('mahasiswa.destroy', $data->id) }}" method="POST">
@@ -77,7 +77,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td class="text-center" colspan="6">Tidak Ada Data Mahasiswa</td>
+                            <td class="text-center" colspan="6">Tidak Ada Data</td>
                         </tr>
                     @endif
                     </tbody>

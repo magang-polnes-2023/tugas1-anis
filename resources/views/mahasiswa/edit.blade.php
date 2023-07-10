@@ -41,6 +41,18 @@
             </script>
         @endif
         @method('PUT')
+            <div class="row mb-3">
+                    <label for="nama" class="col-sm-2 col-form-label">Nama Universitas</label>
+                    <div class="coll-sm-10">
+                    <select class="form-control select" name="universitas_id" id="universitas_id">
+                        @foreach ($univ as $univItem)
+                            <option value="{{ $univItem->id }}" {{$univItem->id == $mahasiswa->universitas_id ? 'selected' : ''}}>
+                            </option>
+                                {{$univItem->nama}}
+                        @endforeach
+                        </select>
+                </div>
+            </div>
             <div class="mb-3 row">
                 <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">

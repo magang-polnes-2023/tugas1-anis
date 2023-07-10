@@ -42,7 +42,7 @@
         @endif
         @method('PUT')
             <div class="mb-3 row">
-                <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                <label for="nama" class="col-sm-2 col-form-label">Nama Universitas</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name='nama' id="nama" value="{{$universitas->nama}}">
                 </div>

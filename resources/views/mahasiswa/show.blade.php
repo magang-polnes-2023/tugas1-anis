@@ -11,7 +11,10 @@
                         </div> 
                         <img src="{{ asset('storage/post/'.$mahasiswa->image) }}" class="w-30 rounded">
                         <hr>
-                        <h4>Nama            : {{ $mahasiswa->nama }}</h4>
+                        <h4>Nama Universitas           : {{ $mahasiswa->universitas->nama }}</h4>
+                        <p class="tmt-3">
+                            Nama              : {!! $mahasiswa->nama !!}
+                        </p>
                         <p class="tmt-3">
                             Nim             : {!! $mahasiswa->nim !!}
                         </p>
